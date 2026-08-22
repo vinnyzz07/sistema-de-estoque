@@ -5,7 +5,10 @@
 {% block conteudo %}
     <div class="cabecalho-pagina">
         <h2>Produtos</h2>
-        <a href="{{ url_for('main.novo_produto') }}" class="botao botao-primario">Novo Produto</a>
+        <div>
+            <input type="text" id="busca-produto" placeholder="Digite o nome do produto..." class="campo-busca">
+            <a href="{{ url_for('main.novo_produto') }}" class="botao botao-primario">Novo Produto</a>
+        </div>
     </div>
 
     {% if produtos %}

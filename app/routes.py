@@ -255,3 +255,40 @@ def nova_movimentacao():
         return redirect(url_for('main.listar_movimentacoes'))
 
     return render_template('movimentacoes/formulario.html', produtos=produtos)
+
+@bp.route('/api/produtos')
+def api_produtos():
+    produtos = Produto.query.order_by(Produto.nome).all()
+    
+    lista = []
+    for produto in produtos:
+        lista.append({
+            'id': produto.id,
+            'nome': produto.nome,
+            'descricao': produto.descricao,
+            'quantidade': produto.quantidade,
+            'quantidade_minima': produto.quantidade_minima,
+            'preco': produto.preco,
+            'categoria': produto.categoria.nome,
+            'estoque_baixo': produto.estoque_baixo()
+        })
+    
+    return lista
+
+@bp.route('/api/produtos/estoque-baixo')
+def api_estoque_baixo():
+    produtos = Produto.query.filter(
+        Produto.quantidade <= Produto.quantidade_minima
+    ).order_by(Produto.nome).all()
+    
+    lista = []
+    for produto in produtos:
+        lista.append({
+            'id': produto.id,
+            'nome': produto.nome,
+            'quantidade': produto.quantidade,
+            'quantidade_minima': produto.quantidade_minima,
+            'categoria': produto.categoria.nome
+        })
+    
+    return lista
