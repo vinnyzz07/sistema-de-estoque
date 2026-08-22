@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    {% if produto %}Editar Produto{% else %}Novo Produto{% endif %} - Sistema de Estoque
+{% endblock %}
+
+{% block conteudo %}
+    <h2>{% if produto %}Editar Produto{% else %}Novo Produto{% endif %}</h2>
+
+    <form method="POST" class="formulario">
+        <div class="campo">
+            <label for="nome">Nome *</label>
+            <input type="text" id="nome" name="nome" value="{{ produto.nome if produto else '' }}" required>
+        </div>
+
+        <div class="campo">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao" rows="3">{{ produto.descricao if produto else '' }}</textarea>
+        </div>
+
+        <div class="campo">
+            <label for="categoria_id">Categoria *</label>
+            <select id="categoria_id" name="categoria_id" required>
+                <option value="">Selecione uma categoria</option>
+                {% for cat in categorias %}
+                    <option value="{{ cat.id }}" 
+                        {% if produto and produto.categoria_id == cat.id %}selected{% endif %}>
+                        {{ cat.nome }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="quantidade">Quantidade Atual</label>
+            <input type="number" id="quantidade" name="quantidade" min="0" value="{{ produto.quantidade if produto else 0 }}">
+        </div>
+
+        <div class="campo">
+            <label for="quantidade_minima">Quantidade Mínima (alerta)</label>
+            <input type="number" id="quantidade_minima" name="quantidade_minima" min="0" value="{{ produto.quantidade_minima if produto else 5 }}">
+        </div>
+
+        <div class="campo">
+            <label for="preco">Preço (R$)</label>
+            <input type="text" id="preco" name="preco" value="{{ '%.2f'|format(produto.preco) if produto else '0.00' }}">
+        </div>
+
+        <div class="botoes-formulario">
+            <button type="submit" class="botao botao-primario">
+                {% if produto %}Salvar Alterações{% else %}Cadastrar{% endif %}
+            </button>
+            <a href="{{ url_for('main.listar_produtos') }}" class="botao botao-secundario">Cancelar</a>
+        </div>
+    </form>
+{% endblock %}

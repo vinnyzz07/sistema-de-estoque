@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Produtos - Sistema de Estoque{% endblock %}
+
+{% block conteudo %}
+    <div class="cabecalho-pagina">
+        <h2>Produtos</h2>
+        <a href="{{ url_for('main.novo_produto') }}" class="botao botao-primario">Novo Produto</a>
+    </div>
+
+    {% if produtos %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Quantidade</th>
+                    <th>Mínimo</th>
+                    <th>Preço</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto in produtos %}
+                <tr class="{% if produto.estoque_baixo() %}estoque-baixo{% endif %}">
+                    <td>{{ produto.nome }}</td>
+                    <td>{{ produto.categoria.nome }}</td>
+                    <td>{{ produto.quantidade }}</td>
+                    <td>{{ produto.quantidade_minima }}</td>
+                    <td>R$ {{ '%.2f'|format(produto.preco) }}</td>
+                    <td>
+                        {% if produto.estoque_baixo() %}
+                            <span class="badge badge-alerta">Estoque Baixo</span>
+                        {% else %}
+                            <span class="badge badge-ok">OK</span>
+                        {% endif %}
+                    </td>
+                    <td class="acoes">
+                        <a href="{{ url_for('main.editar_produto', id=produto.id) }}" class="botao botao-pequeno">Editar</a>
+                        
+                        <form action="{{ url_for('main.excluir_produto', id=produto.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">
+                            <button type="submit" class="botao botao-pequeno botao-perigo">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="mensagem-vazia">Nenhum produto cadastrado ainda.</p>
+    {% endif %}
+{% endblock %}

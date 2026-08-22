@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    {% if categoria %}Editar Categoria{% else %}Nova Categoria{% endif %} - Sistema de Estoque
+{% endblock %}
+
+{% block conteudo %}
+    <h2>{% if categoria %}Editar Categoria{% else %}Nova Categoria{% endif %}</h2>
+
+    <form method="POST" class="formulario">
+        <div class="campo">
+            <label for="nome">Nome *</label>
+            <input type="text" id="nome" name="nome" value="{{ categoria.nome if categoria else '' }}" required>
+        </div>
+
+        <div class="campo">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao" rows="3">{{ categoria.descricao if categoria else '' }}</textarea>
+        </div>
+
+        <div class="botoes-formulario">
+            <button type="submit" class="botao botao-primario">
+                {% if categoria %}Salvar Alterações{% else %}Cadastrar{% endif %}
+            </button>
+            <a href="{{ url_for('main.listar_categorias') }}" class="botao botao-secundario">Cancelar</a>
+        </div>
+    </form>
+{% endblock %}

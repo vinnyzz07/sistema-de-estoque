@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Sistema de Estoque{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Sistema de Estoque</h1>
+        <nav>
+            <a href="{{ url_for('main.index') }}">Início</a>
+            <a href="{{ url_for('main.listar_categorias') }}">Categorias</a>
+            <a href="{{ url_for('main.listar_produtos') }}">Produtos</a>
+            <a href="{{ url_for('main.listar_movimentacoes') }}">Movimentações</a>
+        </nav>
+    </header>
+
+    <main>
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% if mensagens %}
+                {% for categoria, mensagem in mensagens %}
+                    <div class="alerta alerta-{{ categoria }}">
+                        {{ mensagem }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block conteudo %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>Sistema de Estoque &copy; 2026</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Nova Movimentação - Sistema de Estoque{% endblock %}
+
+{% block conteudo %}
+    <h2>Nova Movimentação de Estoque</h2>
+
+    <form method="POST" class="formulario">
+        <div class="campo">
+            <label for="produto_id">Produto *</label>
+            <select id="produto_id" name="produto_id" required>
+                <option value="">Selecione um produto</option>
+                {% for produto in produtos %}
+                    <option value="{{ produto.id }}">
+                        {{ produto.nome }} (Estoque atual: {{ produto.quantidade }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="tipo">Tipo de Movimentação *</label>
+            <select id="tipo" name="tipo" required>
+                <option value="">Selecione o tipo</option>
+                <option value="entrada">Entrada (adicionar ao estoque)</option>
+                <option value="saida">Saída (remover do estoque)</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="quantidade">Quantidade *</label>
+            <input type="number" id="quantidade" name="quantidade" min="1" required>
+        </div>
+
+        <div class="campo">
+            <label for="observacao">Observação</label>
+            <textarea id="observacao" name="observacao" rows="3" placeholder="Ex: Compra do fornecedor, venda, perda, etc."></textarea>
+        </div>
+
+        <div class="botoes-formulario">
+            <button type="submit" class="botao botao-primario">Registrar Movimentação</button>
+            <a href="{{ url_for('main.listar_movimentacoes') }}" class="botao botao-secundario">Cancelar</a>
+        </div>
+    </form>
+{% endblock %}
