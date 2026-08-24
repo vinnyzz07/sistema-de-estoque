@@ -5,8 +5,16 @@
 {% block conteudo %}
     <div class="cabecalho-pagina">
         <h2>Produtos</h2>
-        <div>
+        <div class="filtros">
             <input type="text" id="busca-produto" placeholder="Digite o nome do produto..." class="campo-busca">
+        
+            <select id="filtro-categoria" class="campo-select">
+                <option value="">Todas as categorias</option>
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.nome }}">{{ categoria.nome }}</option>
+                {% endfor %}
+            </select>
+
             <a href="{{ url_for('main.novo_produto') }}" class="botao botao-primario">Novo Produto</a>
         </div>
     </div>

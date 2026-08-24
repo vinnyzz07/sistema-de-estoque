@@ -98,7 +98,8 @@ def excluir_categoria(id):
 @bp.route('/produtos')
 def listar_produtos():
     produtos = Produto.query.order_by(Produto.nome).all()
-    return render_template('produtos/listar.html', produtos=produtos)
+    categorias = Categoria.query.order_by(Categoria.nome).all()
+    return render_template('produtos/listar.html', produtos=produtos, categorias=categorias)
 
 @bp.route('/produtos/novo', methods=['GET', 'POST'])
 def novo_produto():

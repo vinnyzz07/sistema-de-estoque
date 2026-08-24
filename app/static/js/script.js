@@ -1,21 +1,32 @@
 document.addEventListener('DOMContentLoaded', function () {
     const campoBusca = document.getElementById('busca-produto');
+    const filtroCategoria = document.getElementById('filtro-categoria');
+
+    function filtrarProdutos() {
+        const termo = campoBusca ? campoBusca.value.toLowerCase().trim() : '';
+        const categoriaSelecionada = filtroCategoria ? filtroCategoria.value.toLowerCase() : '';
+        const linhas = document.querySelectorAll('table tbody tr');
+
+        linhas.forEach(function (linha) {
+            const nomeProduto = linha.querySelector('td').textContent.toLowerCase();
+            const categoriaProduto = linha.children[1].textContent.toLowerCase(); // 2ª coluna = categoria
+
+            const correspondeNome = nomeProduto.includes(termo);
+            const correspondeCategoria = categoriaSelecionada === '' || categoriaProduto === categoriaSelecionada;
+
+            if (correspondeNome && correspondeCategoria) {
+                linha.style.display = '';
+            } else {
+                linha.style.display = 'none';
+            }
+        });
+    }
 
     if (campoBusca) {
-        campoBusca.addEventListener('input', function () {
-            const termo = this.value.toLowerCase().trim();
-            const linhas = document.querySelectorAll('table tbody tr');
+        campoBusca.addEventListener('input', filtrarProdutos);
+    }
 
-            linhas.forEach(function (linha) {
-                // Pega apenas a primeira coluna (nome do produto)
-                const nomeProduto = linha.querySelector('td').textContent.toLowerCase();
-
-                if (nomeProduto.includes(termo)) {
-                    linha.style.display = '';
-                } else {
-                    linha.style.display = 'none';
-                }
-            });
-        });
+    if (filtroCategoria) {
+        filtroCategoria.addEventListener('change', filtrarProdutos);
     }
 });

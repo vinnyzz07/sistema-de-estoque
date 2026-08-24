@@ -265,3 +265,17 @@ th {
     font-size: 0.95rem;
     width: 220px;
 }
+
+.filtros {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.campo-select {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    background-color: white;
+}
