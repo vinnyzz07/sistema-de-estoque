@@ -30,3 +30,20 @@ document.addEventListener('DOMContentLoaded', function () {
         filtroCategoria.addEventListener('change', filtrarProdutos);
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const botoesAba = document.querySelectorAll('.aba');
+    const conteudos = document.querySelectorAll('.conteudo-aba');
+
+    botoesAba.forEach(function (botao) {
+        botao.addEventListener('click', function () {
+            const alvo = this.getAttribute('data-aba');
+
+            botoesAba.forEach(b => b.classList.remove('ativa'));
+            conteudos.forEach(c => c.classList.remove('ativa'));
+
+            this.classList.add('ativa');
+            document.getElementById(alvo).classList.add('ativa');
+        });
+    });
+});

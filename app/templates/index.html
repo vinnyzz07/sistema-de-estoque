@@ -24,9 +24,12 @@
         </div>
     </div>
 
-    <section class="secao">
-        <h3>Produtos com Estoque Baixo</h3>
+    <div class="abas">
+        <button class="aba ativa" data-aba="estoque-baixo">Estoque Baixo</button>
+        <button class="aba" data-aba="movimentacoes">Últimas Movimentações</button>
+    </div>
 
+    <div id="estoque-baixo" class="conteudo-aba ativa">
         {% if produtos_estoque_baixo %}
             <table>
                 <thead>
@@ -51,11 +54,9 @@
         {% else %}
             <p class="mensagem-vazia">Nenhum produto com estoque baixo no momento.</p>
         {% endif %}
-    </section>
+    </div>
 
-    <section class="secao">
-        <h3>Últimas Movimentações</h3>
-
+    <div id="movimentacoes" class="conteudo-aba">
         {% if ultimas_movimentacoes %}
             <table>
                 <thead>
@@ -86,5 +87,5 @@
         {% else %}
             <p class="mensagem-vazia">Nenhuma movimentação registrada ainda.</p>
         {% endif %}
-    </section>
+    </div>
 {% endblock %}
