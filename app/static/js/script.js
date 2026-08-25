@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         linhas.forEach(function (linha) {
             const nomeProduto = linha.querySelector('td').textContent.toLowerCase();
-            const categoriaProduto = linha.children[1].textContent.toLowerCase(); // 2ª coluna = categoria
+            const categoriaProduto = linha.children[1].textContent.toLowerCase();
 
             const correspondeNome = nomeProduto.includes(termo);
             const correspondeCategoria = categoriaSelecionada === '' || categoriaProduto === categoriaSelecionada;
