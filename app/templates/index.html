@@ -3,12 +3,15 @@
 {% block titulo %}Início - Sistema de Estoque{% endblock %}
 
 {% block conteudo %}
-    <h2>Dashboard</h2>
+    <div class="dashboard-topo">
+        <h2>Dashboard</h2>
+        <p class="subtitulo">Visão geral do seu estoque em tempo real</p>
+    </div>
 
     <div class="cards">
         <div class="card">
             <h3>{{ total_produtos }}</h3>
-            <p>Produtos</p>
+            <p>Produtos cadastrados</p>
         </div>
         <div class="card">
             <h3>{{ total_categorias }}</h3>
@@ -16,76 +19,11 @@
         </div>
         <div class="card">
             <h3>{{ total_movimentacoes }}</h3>
-            <p>Movimentações</p>
+            <p>Movimentações registradas</p>
         </div>
         <div class="card card-alerta">
             <h3>{{ produtos_estoque_baixo|length }}</h3>
-            <p>Estoque Baixo</p>
+            <p>Produtos com estoque baixo</p>
         </div>
-    </div>
-
-    <div class="abas">
-        <button class="aba ativa" data-aba="estoque-baixo">Estoque Baixo</button>
-        <button class="aba" data-aba="movimentacoes">Últimas Movimentações</button>
-    </div>
-
-    <div id="estoque-baixo" class="conteudo-aba ativa">
-        {% if produtos_estoque_baixo %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Categoria</th>
-                        <th>Quantidade</th>
-                        <th>Mínimo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for produto in produtos_estoque_baixo %}
-                    <tr class="estoque-baixo">
-                        <td>{{ produto.nome }}</td>
-                        <td>{{ produto.categoria.nome }}</td>
-                        <td>{{ produto.quantidade }}</td>
-                        <td>{{ produto.quantidade_minima }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p class="mensagem-vazia">Nenhum produto com estoque baixo no momento.</p>
-        {% endif %}
-    </div>
-
-    <div id="movimentacoes" class="conteudo-aba">
-        {% if ultimas_movimentacoes %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Produto</th>
-                        <th>Tipo</th>
-                        <th>Quantidade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for mov in ultimas_movimentacoes %}
-                    <tr>
-                        <td>{{ mov.data.strftime('%d/%m/%Y %H:%M') }}</td>
-                        <td>{{ mov.produto.nome }}</td>
-                        <td>
-                            {% if mov.tipo == 'entrada' %}
-                                <span class="badge badge-entrada">Entrada</span>
-                            {% else %}
-                                <span class="badge badge-saida">Saída</span>
-                            {% endif %}
-                        </td>
-                        <td>{{ mov.quantidade }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p class="mensagem-vazia">Nenhuma movimentação registrada ainda.</p>
-        {% endif %}
     </div>
 {% endblock %}

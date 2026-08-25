@@ -270,34 +270,35 @@ tr:hover td {
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.2rem;
-    margin: 1.5rem 0 2.5rem 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
 }
 
 .card {
     background-color: #16181c;
-    padding: 1.6rem;
-    border-radius: 12px;
+    padding: 2.2rem 1.5rem;
+    border-radius: 16px;
     border: 1px solid #2f3336;
     text-align: center;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, transform 0.2s;
 }
 
 .card:hover {
     border-color: #536471;
+    transform: translateY(-3px);
 }
 
 .card h3 {
-    font-size: 2.1rem;
+    font-size: 2.8rem;
     font-weight: 700;
     color: #e7e9ea;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.4rem;
 }
 
 .card p {
     color: #8b98a5;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .card-alerta {
@@ -396,4 +397,18 @@ tr:hover td {
 
 .conteudo-aba.ativa {
     display: block;
+}
+
+.dashboard-topo {
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-topo h2 {
+    margin-bottom: 0.3rem;
+}
+
+.subtitulo {
+    color: #8b98a5;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
 }
