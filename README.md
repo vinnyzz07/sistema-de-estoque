@@ -8,7 +8,7 @@ A estrutura do projeto é composta pela pasta app, que contém os arquivos __ini
 
 Para executar o projeto, primeiro clone o repositório com o comando git clone https://github.com/vinnyzz07/sistema-de-estoque.git e acesse a pasta com o comando cd sistema-de-estoque. Em seguida, crie o ambiente virtual com o comando python -m venv venv e ative-o. No Windows, utilize o comando venv\Scripts\activate, enquanto no Linux ou macOS utilize o comando source venv/bin/activate. Depois, instale as dependências com o comando pip install -r requirements.txt e execute a aplicação com o comando python run.py.
 
-Após iniciar a aplicação, o sistema estará disponível em http://127.0.0.1:5000. Através da interface web é possível gerenciar categorias, produtos e movimentações de estoque, além de visualizar um dashboard com resumo geral do estoque. As rotas de API estão disponíveis em /api/produtos e /api/produtos/estoque-baixo.
+Após iniciar a aplicação, o sistema estará disponível em http://127.0.0.1:5000. Através da interface web é possível gerenciar categorias, produtos e movimentações de estoque, além de visualizar uma visão geral do estoque. As rotas de API estão disponíveis em /api/produtos e /api/produtos/estoque-baixo.
 
 O projeto utiliza SQLite como banco de dados, e o arquivo estoque.db é criado automaticamente na pasta instance durante a execução da aplicação.
 
